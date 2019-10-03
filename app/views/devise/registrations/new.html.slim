@@ -1,8 +1,8 @@
 .signupPage
   .titleArea
     h1
-      | アカウントを新規作成
-    .m-3
+      | 新規アカウント登録
+    .m-2
       | or
     = render "devise/shared/links"
   .container
@@ -27,4 +27,4 @@
         = f.label :password_confirmation
         = f.password_field :password_confirmation, class:"form-control", autocomplete: "off"
       .text-center
-        = f.submit "アカウントを作成", class: "btn submitBtn"
+        = f.submit "登録", class: "btn submitBtn"
