@@ -9,27 +9,26 @@
   transition: opacity .5s;
   cursor: pointer;
   &:hover {
-    opacity: .6;
+    opacity: .5;
   }
 }
-// sign_up
-.signupPage {
+// sign_up, sign_in
+.titleArea {
   margin-top: 5vh;
-  .titleArea {
-    text-align: center;
-    h1 {font-size: 2rem;}
-    margin-bottom: 5vh;
-  }
-  .signupForm {
-    .form-group {
-      margin: 0 auto 1rem auto;
-      max-width: 500px;
-      .form-control {
-        background: #f6f8fa;
-      }
+  text-align: center;
+  h1 {font-size: 2rem;}
+  margin-bottom: 5vh;
+}
+.signupForm {
+  .form-group {
+    margin: 0 auto 1rem auto;
+    max-width: 500px;
+    .form-control {
+      background: #f6f8fa;
     }
   }
 }
+
 // devise_shared_links
 .acountPage_link {
   & > a {
