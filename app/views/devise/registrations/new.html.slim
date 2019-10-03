@@ -1,0 +1,30 @@
+.signupPage
+  .titleArea
+    h1
+      | アカウントを新規作成
+    .m-3
+      | or
+    = render "devise/shared/links"
+  .container
+    = form_with scope: resource, as: resource_name, url: registration_path(resource_name), html: { class: "mt-5, signupForm" }, local: true do |f|
+      = devise_error_messages!
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: "form-control",autocomplete: "email"
+      .form-group
+        = f.label :password
+        - if @minimum_password_length
+          em
+            | (
+            = @minimum_password_length
+            | 文字以上)
+        br
+        = f.password_field :password, class: "form-control",autocomplete: "off"
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class:"form-control", autocomplete: "off"
+      .text-center
+        = f.submit "アカウントを作成", class: "btn submitBtn"
