@@ -28,4 +28,6 @@ html
       .alert.alert-danger
         =flash[:alert]
         button.close data-dismiss="alert" &times;
-    = yield
+
+    .container
+      = yield
