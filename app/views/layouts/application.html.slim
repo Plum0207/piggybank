@@ -11,4 +11,13 @@ html
     .header
       nav.navbar.navbar-expand.bavbar-light.bg-info
         a.navbar-brand href="#"  Piggybank
+
+    - if flash[:notice]
+      .alert.alert-info.alert-dismissible
+        =flash[:notice]
+        button.close data-dismiss="alert" &times;
+    - if flash[:alert]
+      .alert.alert-danger
+        =flash[:alert]
+        button.close data-dismiss="alert" &times;
     = yield
