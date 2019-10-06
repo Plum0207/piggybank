@@ -8,4 +8,5 @@ class Record < ApplicationRecord
     validates :amount
     validates :wallet
   end
+  validates :amount, numericality: { only_integer: true }
 end
