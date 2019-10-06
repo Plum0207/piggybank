@@ -8,9 +8,18 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .header
-      nav.navbar.navbar-expand.bavbar-light.bg-info
-        a.navbar-brand href="#"  Piggybank
+    - if current_user
+      .header
+        nav.navbar.navbar-expand.navbar-light.bg-info
+          a.navbar-brand href="#" Piggybank
+          ul.navbar-nav.ml-auto
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle data-toggle="dropdown" #{current_user.nickname}
+              .dropdown-menu
+                = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+                = link_to 'ユーザー情報変更', edit_user_registration_path, class: 'dropdown-item'
+            li.nav-item= link_to '帳簿一覧', books_path, class: 'nav-link'
+
 
     - if flash[:notice]
       .alert.alert-info.alert-dismissible
