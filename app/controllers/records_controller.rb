@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   before_action :set_book
 
   def index
-    @records = @book.records
+    @records = @book.records.all
   end
 
   def new
