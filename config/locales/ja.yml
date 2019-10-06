@@ -8,6 +8,13 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     attributes:
+      user:
+        nickname: "ニックネーム"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        email: "メールアドレス"
+        current_password: "パスワード"
+
       book:
         title: "タイトル"
         users: "ユーザー"
