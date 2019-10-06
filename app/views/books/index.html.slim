@@ -1,0 +1,9 @@
+h1 帳簿一覧
+= link_to '帳簿を作成', new_book_path, class: 'btn btn-info'
+
+.aside
+  .books
+    - @books.each do |book|
+      =link_to "#" , class: "book-link" do
+        .book
+          =book.title

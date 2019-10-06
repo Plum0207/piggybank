@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true, length: { maximum: 12}
+
+  has_many :book_users
+  has_many :books, through: :book_users
 end
