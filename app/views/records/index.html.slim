@@ -13,7 +13,7 @@ h1 入出金一覧
     tbody
       - @records.each do |record|
         tr
-          td= record.date
+          td= record.date.strftime("%F")
           td= record.content
           td= record.amount
           td= record.wallet
