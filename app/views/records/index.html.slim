@@ -19,6 +19,11 @@ h1 入出金一覧
           td= record.amount
           td= record.wallet
           td
-            = link_to edit_book_record_path(@book, record), class: 'btn btn-secondary btn-sm' do
+            = link_to edit_book_record_path(@book, record), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
               span.d-none.d-sm-inline.pl-1 編集
+            = link_to book_record_path(@book, record), method: :delete,
+            data: { confirm: "記録を削除しますか？"},
+            class: 'btn btn-outline-secondary btn-sm ml-2' do
+              i.fa.fa-trash
+              span.d-none.d-sm-inline.pl-1 削除
