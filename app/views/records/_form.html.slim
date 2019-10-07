@@ -1,0 +1,15 @@
+=form_with model: [book, record], local: true do |f|
+  .form-group
+    =f.label :date, "日付"
+    =f.date_field :date, value: Time.now.strftime("%F"), class: 'form-control'
+  .form-group
+    =f.label :content, "内容"
+    =f.text_field :content, class: 'form-control'
+  .form-group
+    =f.label :amount, "金額"
+    =f.number_field :amount, class: 'form-control'
+  .form-group
+    =f.label :wallet, "支払者"
+    =f.text_field :wallet, class: 'form-control'
+  .text-center
+    =f.submit class: 'btn btn-info'

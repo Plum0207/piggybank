@@ -7,6 +7,9 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      book: 帳簿
+      record: 記録
     attributes:
       user:
         nickname: "ニックネーム"
@@ -14,10 +17,14 @@ ja:
         password_confirmation: "パスワード確認"
         email: "メールアドレス"
         current_password: "パスワード"
-
       book:
         title: "タイトル"
         users: "ユーザー"
+      record:
+        date: "日付"
+        content: "内容"
+        amount: "金額"
+        wallet: "支払者"
   date:
     abbr_day_names:
     - 日
