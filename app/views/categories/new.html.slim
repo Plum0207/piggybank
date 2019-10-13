@@ -1,0 +1,12 @@
+h1 費目の追加
+= link_to '戻る', book_records_path, class: 'btn btn-info mb-5'
+
+=form_with model: [@book, @category], local: true do |f|
+  .form-group
+    =f.label :name, "費目"
+    =f.text_field :name, class: 'form-control'
+  .form-group
+    =f.label :budget, "予算"
+    =f.number_field :budget, class: 'form-control'
+  .text-center
+    =f.submit class: 'btn btn-info'
