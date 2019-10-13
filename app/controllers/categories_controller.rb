@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
     @category = @book.categories.new(category_params)
     if @category.save
       redirect_to book_categories_path(@book),
-      notice: 'カテゴリーを追加しました'
+      notice: '費目と予算を追加しました'
     else
       render :new
     end
@@ -23,6 +23,12 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    if @category.update(category_params)
+    redirect_to book_categories_path(@book), notice: '費目と予算を更新しました'
+    else
+      flash.new[:alert] = "費目と予算を入力してください"
+      render :edit
+    end
   end
 
   private

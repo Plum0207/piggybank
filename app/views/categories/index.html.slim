@@ -1,4 +1,4 @@
-h1 費目一覧
+h1 費目と予算一覧
 = link_to '追加', new_book_category_path, class: 'btn btn-info'
 
 .mb-3
@@ -14,3 +14,7 @@ h1 費目一覧
         tr
           td= category.name
           td= category.budget
+          td
+            = link_to edit_book_category_path(@book, category), class: 'btn btn-outline-secondary btn-sm' do
+              i.fa.fa-edit
+              span.d-none.d-sm-inline.pl-1 編集
