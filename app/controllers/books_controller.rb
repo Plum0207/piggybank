@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
-  before_action :set_book, only: [:edit, :update]
+  before_action :set_book, only: [:edit, :update, :destroy]
+  
   def index
     @books = current_user.books.order("title ASC")
   end
@@ -13,7 +14,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to new_book_category_path(@book), notice: '帳簿を作成しました。<br>カテゴリーと予算を設定してください。'
+      redirect_to new_book_category_path(@book), notice: '帳簿を作成しました。カテゴリーと予算を設定してください。'
     else
       render :new
     end
@@ -25,6 +26,12 @@ class BooksController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @book.destroy
+    redirect_to books_path,
+    notice: '帳簿を削除しました。'
   end
 
   private

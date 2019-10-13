@@ -7,7 +7,7 @@ h1 帳簿一覧
     thead.thead-light
       tr
         th= Book.human_attribute_name(:title)
-        th= Record.human_attribute_name(:users)
+        th= Book.human_attribute_name(:users)
         th
     tbody
       - @books.each do |book|
@@ -21,3 +21,8 @@ h1 帳簿一覧
             = link_to edit_book_path(book), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
               span.d-none.d-sm-inline.pl-1 編集
+            = link_to book_path(book), method: :delete,
+            data: { confirm: "帳簿を削除しますか？"},
+            class: 'btn btn-outline-secondary btn-sm ml-2' do
+              i.fa.fa-trash
+              span.d-none.d-sm-inline.pl-1 削除
