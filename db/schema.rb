@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_06_085251) do
+ActiveRecord::Schema.define(version: 2019_10_13_050642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2019_10_06_085251) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "budget", null: false
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_categories_on_book_id"
+  end
+
   create_table "records", force: :cascade do |t|
     t.datetime "date", null: false
     t.string "content", null: false
@@ -39,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_085251) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category", null: false
     t.index ["book_id"], name: "index_records_on_book_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
@@ -59,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_085251) do
 
   add_foreign_key "book_users", "books"
   add_foreign_key "book_users", "users"
+  add_foreign_key "categories", "books"
   add_foreign_key "records", "books"
   add_foreign_key "records", "users"
 end
