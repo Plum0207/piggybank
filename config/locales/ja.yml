@@ -24,6 +24,7 @@ ja:
         date: "日付"
         content: "内容"
         amount: "金額"
+        category: "費目"
         wallet: "支払者"
       category:
         name: "費目"

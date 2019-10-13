@@ -10,6 +10,7 @@ h1 入出金一覧
         th= Record.human_attribute_name(:date)
         th= Record.human_attribute_name(:content)
         th= Record.human_attribute_name(:amount)
+        th= Record.human_attribute_name(:category)
         th= Record.human_attribute_name(:wallet)
         th
     tbody
@@ -18,6 +19,7 @@ h1 入出金一覧
           td= record.date.strftime("%F")
           td= record.content
           td= record.amount
+          td= record.category
           td= record.wallet
           td
             = link_to edit_book_record_path(@book, record), class: 'btn btn-outline-secondary btn-sm' do

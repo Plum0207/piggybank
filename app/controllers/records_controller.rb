@@ -40,7 +40,7 @@ class RecordsController < ApplicationController
 
   private
   def record_params
-    params.require(:record).permit(:date, :content, :amount, :wallet).merge(user_id: current_user.id)
+    params.require(:record).permit(:date, :content, :amount, :category, :wallet).merge(user_id: current_user.id)
   end
 
   def set_book
