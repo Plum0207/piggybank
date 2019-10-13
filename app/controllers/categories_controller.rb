@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_book
+  before_action :set_category, except: [:index, :new, :create]
 
   def index
     @categories = @book.categories.all
@@ -31,6 +32,12 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy
+    @category.destroy
+    redirect_to book_categories_path(@book),
+    notice: '費目と予算を削除しました'
+  end
+
   private
 
   def category_params
@@ -39,5 +46,9 @@ class CategoriesController < ApplicationController
 
   def set_book
     @book = Book.find(params[:book_id])
+  end
+
+  def set_category
+    @category = Category.find(params[:id])
   end
 end
