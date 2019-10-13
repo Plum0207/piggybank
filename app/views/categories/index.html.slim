@@ -7,14 +7,58 @@ h1 費目と予算一覧
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
+        th= "合計"
+        th= "予算合計"
+        th= "使用額合計"
+        th= "差額"
+        th
+    tbody
+      tr
+        td= "収入"
+        - income_budget = @categories.find_by(name: "収入").budget
+        td= income_budget
+        - income_records = @book.records.where(category: "収入")
+        - income_amount = 0
+        - income_records.each do |income_record|
+          - income_amount += income_record.amount
+        td= income_amount
+        td= income_budget - income_amount
+        td
+      tr
+        td= "支出"
+        - spending_budget = 0
+        - @categories.each do |category|
+          - next if category.name == "収入"
+          -spending_budget += category.budget
+        td= spending_budget
+        - spending_records = @book.records.where.not(category: "収入")
+        - spending_amount = 0
+        - spending_records.each do |spending_record|
+          - spending_amount += spending_record.amount
+        td = spending_amount
+        td = spending_budget - spending_amount
+        td
+
+.table-responsive
+  table.table.table-sm.table-hover.text-nowrap
+    thead.thead-light
+      tr
         th= Category.human_attribute_name(:name)
         th= Category.human_attribute_name(:budget)
+        th= "使用額"
+        th= "差額"
         th
     tbody
       - @categories.each do |category|
         tr
           td= category.name
           td= category.budget
+          - category_records = @book.records.where(category: "#{category.name}")
+          - used_amount = 0
+          - category_records.each do |category_record|
+            - used_amount += category_record.amount
+          td= used_amount
+          td= category.budget - used_amount
           td
             = link_to edit_book_category_path(@book, category), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
