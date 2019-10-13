@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to root_path, notice: '帳簿を作成しました'
+      redirect_to new_book_category_path(@book), notice: '帳簿を作成しました。<br>カテゴリーと予算を設定してください。'
     else
       render :new
     end
@@ -21,7 +21,7 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to root_path, notice: '帳簿を編集しました'
+      redirect_to root_path, notice: '帳簿を編集しました。'
     else
       render :edit
     end
