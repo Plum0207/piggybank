@@ -15,7 +15,10 @@ h1 費目と予算一覧
     tbody
       tr
         td= "収入"
-        - income_budget = @categories.find_by(name: "収入").budget
+        - if @categories.find_by(name: "収入")
+          - income_budget = @categories.find_by(name: "収入").budget
+        - else
+          - income_budget = 0
         td= income_budget
         - income_records = @book.records.where(category: "収入")
         - income_amount = 0
