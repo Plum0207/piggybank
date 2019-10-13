@@ -1,0 +1,16 @@
+h1 費目一覧
+= link_to '追加', new_book_category_path, class: 'btn btn-info'
+
+.mb-3
+.table-responsive
+  table.table.table-sm.table-hover.text-nowrap
+    thead.thead-light
+      tr
+        th= Category.human_attribute_name(:name)
+        th= Category.human_attribute_name(:budget)
+        th
+    tbody
+      - @categories.each do |category|
+        tr
+          td= category.name
+          td= category.budget

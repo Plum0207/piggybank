@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
   before_action :set_book
 
   def index
+    @categories = @book.categories.all
   end
 
   def new
