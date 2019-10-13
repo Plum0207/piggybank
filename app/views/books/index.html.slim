@@ -1,9 +1,23 @@
 h1 帳簿一覧
 = link_to '帳簿を作成', new_book_path, class: 'btn btn-info'
 
-.aside
-  .books
-    - @books.each do |book|
-      =link_to book_records_path(book), class: "book-link" do
-        .book
-          =book.title
+.mb-3
+.table-responsive
+  table.table.table-sm.table-hover.text-nowrap
+    thead.thead-light
+      tr
+        th= Book.human_attribute_name(:title)
+        th= Record.human_attribute_name(:users)
+        th
+    tbody
+      - @books.each do |book|
+        tr
+          td= book.title
+          - users_nicknames = ""
+          - book.users.each do |user|
+            - users_nicknames += "#{user.nickname}　"
+          td= users_nicknames
+          td
+            = link_to edit_book_path(book), class: 'btn btn-outline-secondary btn-sm' do
+              i.fa.fa-edit
+              span.d-none.d-sm-inline.pl-1 編集
