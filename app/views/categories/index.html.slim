@@ -1,6 +1,10 @@
 h1 費目と予算一覧
-= link_to '追加', new_book_category_path, class: 'btn btn-info'
-= link_to '帳簿へ戻る', book_records_path, class: 'btn btn-info ml-2'
+p
+  | 一覧にある費目のみ、記録を入力するときに選択できます。
+  br
+  |必要な費目と予算をあらかじめ全て追加してください。
+= link_to '費目と予算を追加', new_book_category_path, class: 'btn btn-info'
+= link_to '入出金一覧へ戻る', book_records_path, class: 'btn btn-info ml-2'
 
 .mb-3
 .table-responsive
@@ -15,7 +19,10 @@ h1 費目と予算一覧
     tbody
       tr
         td= "収入"
-        - income_budget = @categories.find_by(name: "収入").budget
+        - if @categories.find_by(name: "収入")
+          - income_budget = @categories.find_by(name: "収入").budget
+        - else
+          - income_budget = 0
         td= income_budget
         - income_records = @book.records.where(category: "収入")
         - income_amount = 0
