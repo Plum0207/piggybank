@@ -12,7 +12,7 @@ h1 帳簿一覧
     tbody
       - @books.each do |book|
         tr
-          td= book.title
+          td= link_to book.title, book_records_path(book)
           - users_nicknames = ""
           - book.users.each do |user|
             - users_nicknames += "#{user.nickname}　"
