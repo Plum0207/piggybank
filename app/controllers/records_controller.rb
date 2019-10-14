@@ -1,6 +1,7 @@
 class RecordsController < ApplicationController
   before_action :set_book
   before_action :set_record, except: [:index, :new, :create, :import]
+  before_action :set_users, only: [:new, :edit]
 
   def index
     @records = @book.records
@@ -15,11 +16,6 @@ class RecordsController < ApplicationController
 
   def new
     @record= Record.new
-    @users=[]
-    @book.users.each do |user|
-      @users << user[:nickname]
-    end
-    @users << "共通"
   end
 
   def create
@@ -67,6 +63,14 @@ class RecordsController < ApplicationController
 
   def set_record
     @record = Record.find(params[:id])
+  end
+
+  def set_users
+    @users=[]
+    @book.users.each do |user|
+      @users << user[:nickname]
+    end
+    @users << "共通"
   end
 
 end
