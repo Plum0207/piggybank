@@ -1,6 +1,7 @@
 h1 入出金一覧
-= link_to '入出金記録を追加', new_book_record_path, class: 'btn btn-info'
-= link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
+.buttons.mb-3
+  = link_to '入出金記録を追加', new_book_record_path, class: 'btn btn-info'
+  = link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
 
 .mb-3
   = paginate @records
