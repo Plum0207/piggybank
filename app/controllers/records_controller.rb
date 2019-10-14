@@ -3,7 +3,7 @@ class RecordsController < ApplicationController
   before_action :set_record, except: [:index, :new, :create]
 
   def index
-    @records = @book.records.all
+    @records = @book.records.order("date DESC")
   end
 
   def new
