@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   before_action :set_book
-  before_action :set_record, except: [:index, :new, :create]
+  before_action :set_record, except: [:index, :new, :create, :import]
 
   def index
     @records = @book.records
@@ -48,6 +48,12 @@ class RecordsController < ApplicationController
     @record.destroy
     redirect_to book_records_path(@book),
     notice: '記録を削除しました'
+  end
+
+  def import
+    @book.records.import(params[:file])
+    redirect_to book_records_path(@book),
+    notice: '記録をインポートしました'
   end
 
   private

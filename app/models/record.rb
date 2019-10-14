@@ -23,4 +23,12 @@ class Record < ApplicationRecord
       end
     end
   end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      record = new
+      record.attributes = row.to_hash.slice(*csv_attributes)
+      record.save!
+    end
+  end
 end

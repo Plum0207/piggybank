@@ -35,3 +35,7 @@ h1 入出金一覧
               i.fa.fa-trash
               span.d-none.d-sm-inline.pl-1 削除
 = link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info mb-3'
+
+= form_with url:import_book_records_path, local: true, multipart: true, class: 'mb-3' do
+  = file_field_tag :file
+  = submit_tag "インポート", class: 'btn btn-info'
