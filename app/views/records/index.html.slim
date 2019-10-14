@@ -28,12 +28,12 @@ h1 入出金一覧
           td
             = link_to edit_book_record_path(@book, record), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
-              span.d-none.d-sm-inline.pl-1 編集
+              span.d-none.d-md-inline.pl-1 編集
             = link_to book_record_path(@book, record), method: :delete,
             data: { confirm: "記録を削除しますか？"},
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
-              span.d-none.d-sm-inline.pl-1 削除
+              span.d-none.d-md-inline.pl-1 削除
 = link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info mb-3'
 
 = form_with url:import_book_records_path, local: true, multipart: true, class: 'mb-3' do
