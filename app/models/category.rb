@@ -16,4 +16,12 @@ class Category < ApplicationRecord
       end
     end
   end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      category = new
+      category.attributes = row.to_hash.slice(*csv_attributes)
+      category.save!
+    end
+  end
 end

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :records, except: [:show] do
       post :import, on: :collection
     end
-    resources :categories, except: [:show]
+    resources :categories, except: [:show] do
+      post :import, on: :collection
+    end
   end
 end

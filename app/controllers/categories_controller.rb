@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_book
-  before_action :set_category, except: [:index, :new, :create]
+  before_action :set_category, except: [:index, :new, :create, :import]
 
   def index
     @categories = @book.categories.all
@@ -41,6 +41,17 @@ class CategoriesController < ApplicationController
     @category.destroy
     redirect_to book_categories_path(@book),
     notice: '費目と予算を削除しました'
+  end
+
+  def import
+    if params[:file]
+      @book.categories.import(params[:file])
+      redirect_to book_categories_path(@book),
+      notice: '費目と予算をインポートしました'
+    else
+      redirect_to book_categories_path(@book)
+      flash[:alert] = "インポートするファイルを選択してください"
+    end
   end
 
   private
