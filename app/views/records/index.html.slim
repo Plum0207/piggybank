@@ -27,12 +27,12 @@ h1 入出金一覧
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
-        th.text-center= Record.human_attribute_name(:date)
-        th.text-center= Record.human_attribute_name(:content)
-        th.text-center= Record.human_attribute_name(:amount)
-        th.text-center= Record.human_attribute_name(:category)
-        th.text-center= Record.human_attribute_name(:wallet)
-        th.text-center
+        th= sort_link(@q, :date)
+        th= sort_link(@q, :content)
+        th= Record.human_attribute_name(:amount)
+        th= sort_link(@q, :category)
+        th= sort_link(@q, :wallet)
+        th
     tbody
       - @records.each do |record|
         tr

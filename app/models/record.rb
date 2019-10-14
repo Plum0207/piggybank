@@ -14,7 +14,7 @@ class Record < ApplicationRecord
   scope :recent, -> { order(date: :desc) }
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[content category wallet]
+    %w[date content category wallet]
   end
 
   def self.ransackable_associations(auth_object = nil)
