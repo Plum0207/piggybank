@@ -47,9 +47,14 @@ class RecordsController < ApplicationController
   end
 
   def import
-    @book.records.import(params[:file])
-    redirect_to book_records_path(@book),
-    notice: '記録をインポートしました'
+    if params[:file]
+      @book.records.import(params[:file])
+      redirect_to book_records_path(@book),
+      notice: '記録をインポートしました'
+    else
+      redirect_to book_records_path(@book)
+      flash[:alert] = "インポートするファイルを選択してください"
+    end
   end
 
   private
