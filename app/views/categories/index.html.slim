@@ -13,7 +13,7 @@ p
       tr
         th= "合計"
         th= "予算合計"
-        th= "使用額合計"
+        th= "実績合計"
         th= "差額"
         th
     tbody
@@ -52,7 +52,7 @@ p
       tr
         th= Category.human_attribute_name(:name)
         th= Category.human_attribute_name(:budget)
-        th= "使用額"
+        th= "実績"
         th= "差額"
         th
     tbody
@@ -75,3 +75,8 @@ p
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
               span.d-none.d-sm-inline.pl-1 削除
+= link_to 'エクスポート', book_categories_path(format: :csv), class: 'btn btn-info mb-3'
+
+= form_with url: import_book_categories_path, local: true, multipart: true, class: 'mb-3' do
+  = file_field_tag :file
+  = submit_tag "インポート", class: 'btn btn-info'
