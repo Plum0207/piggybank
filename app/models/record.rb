@@ -11,6 +11,8 @@ class Record < ApplicationRecord
   end
   validates :amount, numericality: { only_integer: true }
 
+  scope :recent, -> { order(date: :desc) }
+
   def self.ransackable_attributes(auth_object = nil)
     %w[content category wallet]
   end
