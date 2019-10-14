@@ -8,6 +8,11 @@ class RecordsController < ApplicationController
 
   def new
     @record= Record.new
+    @users=[]
+    @book.users.each do |user|
+      @users << user[:nickname]
+    end
+    @users << "共通"
   end
 
   def create
