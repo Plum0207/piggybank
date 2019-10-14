@@ -11,18 +11,18 @@ h1 入出金一覧
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
-        th= Record.human_attribute_name(:date)
-        th= Record.human_attribute_name(:content)
-        th= Record.human_attribute_name(:amount)
-        th= Record.human_attribute_name(:category)
-        th= Record.human_attribute_name(:wallet)
-        th
+        th.text-center= Record.human_attribute_name(:date)
+        th.text-center= Record.human_attribute_name(:content)
+        th.text-center= Record.human_attribute_name(:amount)
+        th.text-center= Record.human_attribute_name(:category)
+        th.text-center= Record.human_attribute_name(:wallet)
+        th.text-center
     tbody
       - @records.each do |record|
         tr
           td= record.date.strftime("%F")
           td= record.content
-          td= record.amount
+          td.text-right.pr-3= record.amount
           td= record.category
           td= record.wallet
           td
