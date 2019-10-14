@@ -1,32 +1,57 @@
 h1 入出金一覧
-= link_to '追加', new_book_record_path, class: 'btn btn-info'
-= link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
+.buttons.mb-3
+  = link_to '入出金記録を追加', new_book_record_path, class: 'btn btn-info'
+  = link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
+
+= search_form_for @q, url:book_records_path, class: 'mb-3' do |f|
+  .form-group.row
+    =f.label :content_cont, '内容', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :content_cont, class: 'form-control'
+  .form-group.row
+    =f.label :category_cont, '費目', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :category_cont, class: 'form-control'
+  .form-group.row
+    =f.label :wallet_cont, '支払者', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :wallet_cont, class: 'form-control'
+  .form-group
+      = f.submit class: 'btn btn-info'
 
 .mb-3
-.table-responsive
+  = paginate @records
+  = page_entries_info @records
+
+.table-responsive.mb-3
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
-        th= Record.human_attribute_name(:date)
-        th= Record.human_attribute_name(:content)
+        th= sort_link(@q, :date)
+        th= sort_link(@q, :content)
         th= Record.human_attribute_name(:amount)
-        th= Record.human_attribute_name(:category)
-        th= Record.human_attribute_name(:wallet)
+        th= sort_link(@q, :category)
+        th= sort_link(@q, :wallet)
         th
     tbody
       - @records.each do |record|
         tr
           td= record.date.strftime("%F")
           td= record.content
-          td= record.amount
+          td.text-right.pr-3= record.amount
           td= record.category
           td= record.wallet
           td
             = link_to edit_book_record_path(@book, record), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
-              span.d-none.d-sm-inline.pl-1 編集
+              span.d-none.d-md-inline.pl-1 編集
             = link_to book_record_path(@book, record), method: :delete,
             data: { confirm: "記録を削除しますか？"},
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
-              span.d-none.d-sm-inline.pl-1 削除
+              span.d-none.d-md-inline.pl-1 削除
+= link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info mb-3'
+
+= form_with url:import_book_records_path, local: true, multipart: true, class: 'mb-3' do
+  = file_field_tag :file
+  = submit_tag "インポート", class: 'btn btn-info'

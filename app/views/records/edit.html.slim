@@ -1,4 +1,4 @@
 h1 入出金記録の編集
-= link_to '戻る', book_records_path, class: 'btn btn-info mb-5'
+= link_to '入出金一覧へ戻る', book_records_path, class: 'btn btn-info mb-5'
 
-= render partial: "form", locals: { book: @book, record: @record }
+= render partial: "form", locals: { book: @book, record: @record, users: @users }

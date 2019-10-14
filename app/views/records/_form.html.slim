@@ -9,11 +9,19 @@
     =f.label :amount, "金額"
     =f.number_field :amount, class: 'form-control'
   .form-group
-    |費目
+    p 費目
     =f.collection_radio_buttons(:category, book.categories, :name, :name) do |b|
       = b.label(class: 'form-check') {b.radio_button(class: 'form-check-input') + b.text}
   .form-group
-    =f.label :wallet, "支払者"
-    =f.text_field :wallet, class: 'form-control'
+    p 支払者
+    - users.each do |user|
+      - if user == current_user.nickname
+        label.form-check
+          =f.radio_button :wallet, "#{user}", checked: true, class: 'form-check-input',id: "record_wallet_#{user}"
+          =f.label :"wallet_#{user}", "#{user}", class: 'form-check-label',for: "record_wallet_#{user}"
+      - else
+        label.form-check
+          =f.radio_button :wallet, "#{user}", class: 'form-check-input', id: "record_wallet_#{user}"
+          =f.label :"wallet_#{user}", "#{user}", class: 'form-check-label', for: "record_wallet_#{user}"
   .text-center
     =f.submit class: 'btn btn-info'
