@@ -1,19 +1,14 @@
-.signinPage
-  .titleArea
-    h1
-      | ログイン
-    .m-2
-      | or
-    = render "devise/shared/links"
-  .container
-    = form_with scope: resource, as: resource_name, url: session_path(resource_name), html: { class: "mt-5, new_user" }, local: true do |f|
-      .form-group
-        = f.label :email
-        br
-        = f.email_field :email, autofocus: true, class: "form-control", autocomplete: "email"
-      .form-group
-        = f.label :password
-        br
-        = f.password_field :password, class: "form-control", autocomplete: "off"
-      .form-group.text-center
-        = f.submit "ログイン", class: "Btn submitBtn"
+h1 ログイン
+p ユーザー登録がお済みでない方は「新規ユーザー登録」をしてください
+= link_to '新規ユーザー登録', new_user_registration_path, class: 'btn btn-secondary mb-3'
+
+= form_with scope: resource, as: resource_name, url: session_path(resource_name), local: true do |f|
+  .form-group
+    = f.label :email
+    br
+    = f.email_field :email, autofocus: true, class: "form-control", autocomplete: "email"
+  .form-group
+    = f.label :password
+    br
+    = f.password_field :password, class: "form-control", autocomplete: "off"
+  = f.submit "ログイン", class: "btn btn-info"
