@@ -11,6 +11,14 @@ class Record < ApplicationRecord
   end
   validates :amount, numericality: { only_integer: true }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[content category wallet]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   def self.csv_attributes
     ["date", "content", "amount", "category", "wallet"]
   end

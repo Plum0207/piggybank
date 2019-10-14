@@ -3,6 +3,22 @@ h1 入出金一覧
   = link_to '入出金記録を追加', new_book_record_path, class: 'btn btn-info'
   = link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
 
+= search_form_for @q, url:book_records_path, class: 'mb-3' do |f|
+  .form-group.row
+    =f.label :content_cont, '内容', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :content_cont, class: 'form-control'
+  .form-group.row
+    =f.label :category_cont, '費目', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :category_cont, class: 'form-control'
+  .form-group.row
+    =f.label :wallet_cont, '支払者', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :wallet_cont, class: 'form-control'
+  .form-group
+      = f.submit class: 'btn btn-info'
+
 .mb-3
   = paginate @records
   = page_entries_info @records

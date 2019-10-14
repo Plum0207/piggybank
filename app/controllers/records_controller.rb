@@ -7,7 +7,8 @@ class RecordsController < ApplicationController
     @records = @book.records
     respond_to do |format|
       format.html do
-        @records = @records.order("date DESC").page(params[:page]).per(10)
+        @q = @book.records.ransack(params[:q])
+        @records = @q.result(distinct: true).page(params[:page]).per(10)
       end
       format.csv { send_data @records.generate_csv,
       filename: "#{@book.title}_#{Time.zone.now.strftime("%Y%m%d")}.csv"}
