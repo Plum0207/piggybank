@@ -4,6 +4,11 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = @book.categories.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @categories.generate_csv, filename: "#{@book.title}-費目_#{Time.zone.now.strftime("%Y%m%d")}.csv"}
+    end
   end
 
   def new
