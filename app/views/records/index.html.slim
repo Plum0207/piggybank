@@ -7,7 +7,7 @@ h1 入出金一覧
   = paginate @records
   = page_entries_info @records
 
-.table-responsive
+.table-responsive.mb-3
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
@@ -34,3 +34,4 @@ h1 入出金一覧
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
               span.d-none.d-sm-inline.pl-1 削除
+= link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info mb-3'

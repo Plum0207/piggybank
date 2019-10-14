@@ -3,7 +3,14 @@ class RecordsController < ApplicationController
   before_action :set_record, except: [:index, :new, :create]
 
   def index
-    @records = @book.records.order("date DESC").page(params[:page]).per(10)
+    @records = @book.records
+    respond_to do |format|
+      format.html do
+        @records = @records.order("date DESC").page(params[:page]).per(10)
+      end
+      format.csv { send_data @records.generate_csv,
+      filename: "#{@book.title}_#{Time.zone.now.strftime("%Y%m%d")}.csv"}
+    end
   end
 
   def new
