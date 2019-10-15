@@ -1,20 +1,24 @@
-.container
-  =form_with model: @book, local: true do |f|
-    -if @book.errors.any?
-      .book-form_errors
-        h3= "エラーが発生しました"
-        ul
-          - @book.errors.full_messages.each do |message|
-            li= message
-    .form-group
-      =f.label :title, "タイトル（20文字以内）"
-      =f.text_field :title, class: "form-control"
-    .form-group
-      =f.label :user, "ユーザー"
-      .collection
-        = f.collection_check_boxes(:user_ids, User.all, :id, :nickname) do |b|
-          = b.label { b.check_box + b.text }
-    .text-center.mb-2
-      =f.submit class: "btn btn-info"
-    .text-center
-      = link_to '戻る', books_path, class: 'btn btn-secondary'
+= link_to '帳簿一覧へ戻る', books_path, class: 'btn btn-secondary mb-3'
+=form_with model: @book, local: true do |f|
+  -if @book.errors.any?
+    .book-form_errors
+      h3= "エラーが発生しました"
+      ul
+        - @book.errors.full_messages.each do |message|
+          li= message
+  .form-group
+    =f.label :title, "タイトル（20文字以内）"
+    =f.text_field :title, class: "form-control"
+  .form-group
+    =f.label :user, "ユーザー"
+    =f.text_field :user, class: "form-control mb-3"
+    .js-book-user.border-bottom.mb-3
+      input type="hidden" name="book[user_ids][]" value="#{current_user.id}"
+      p.book-user__name #{current_user.nickname}
+    - @book.users.each do |user|
+      - next if user == current_user
+      .js-book-user.d-flex.justify-content-between.border-bottom
+        input type="hidden" name="group[user_ids][]" value="#{user.id}"
+        p.book-user__name #{user.nickname}
+        .book-user__btn--remove 削除
+  =f.submit class: "btn btn-info"
