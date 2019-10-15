@@ -10,10 +10,14 @@
     =f.label :title, "タイトル（20文字以内）"
     =f.text_field :title, class: "form-control"
   .form-group
-    =f.label :user, "ユーザー"
-    =f.text_field :user, class: "form-control mb-3"
+    =f.label :user, "ユーザーを追加"
+    =f.text_field :user, id: "user-search-field", class: "form-control mb-3", placeholder: "追加したいユーザー名を入力してください"
+    #user-search-result
+  .form-group
+    =f.label :user, "現在のユーザー"
     .js-book-user.border-bottom.mb-3
       input type="hidden" name="book[user_ids][]" value="#{current_user.id}"
+      #user-search-result
       p.book-user__name #{current_user.nickname}
     - @book.users.each do |user|
       - next if user == current_user
