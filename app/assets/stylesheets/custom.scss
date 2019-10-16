@@ -1,11 +1,13 @@
-.form-control{
+.form-group {
   max-width: 500px;
 }
 
-#user-search-result,
-.js-book-user{
+.book-user {
   max-width: 500px;
   p{
     margin-bottom: 0.5rem;
+  }
+  &__btn {
+    cursor: pointer;
   }
 }

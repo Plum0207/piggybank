@@ -3,7 +3,7 @@ $(function(){
   function appendUser(user){
     let html = `<div class="book-user mb-2 border-bottom d-flex justify-content-between">
                   <p class="book-user__name">${ user.name }</p>
-                  <a class="book-user__btn--add" data-user-id="${ user.id }" data-user-name="${ user.name }">追加</a>
+                  <a class="book-user__btn book-user__btn--add text-primary" data-user-id="${ user.id }" data-user-name="${ user.name }">追加</a>
                 </div>`
     $("#user-search-result").append(html);
   }
@@ -13,6 +13,15 @@ $(function(){
                   <p class="book-user__name">${ msg }</p>
                 </div>`
     $("#user-search-result").append(html);
+  }
+
+  function appendUserToBook(userId, userName){
+    let html = `<div class="book-user mb-2 border-bottom d-flex justify-content-between">
+                  <input name='book[user_ids][]' type='hidden' value=${ userId }>
+                  <p class="book-user__name">${ userName }</p>
+                  <a class="book-user__btn book-user__btn--remove text-secondary">削除</a>
+                </div>`
+    $(".book-users").append(html);
   }
 
   $("#user-search-field").on("keyup", function(){
@@ -44,5 +53,15 @@ $(function(){
 
   })
 
+  $("#user-search-result").on('click', ".book-user__btn--add",function(){
+    $(this).parent().remove();
+    let userId = $(this).data("user-id");
+    let userName = $(this).data("user-name");
+    appendUserToBook(userId, userName);
+  });
+
+  $(".book-users").on('click', ".book-user__btn--remove", function(){
+    $(this).parent().remove();
+  });
 
 })

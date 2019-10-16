@@ -10,19 +10,19 @@
     =f.label :title, "タイトル（20文字以内）"
     =f.text_field :title, class: "form-control"
   .form-group
-    =f.label :user, "ユーザーを追加"
-    =f.text_field :user, id: "user-search-field", class: "form-control mb-3", placeholder: "追加したいユーザー名を入力してください"
+    =f.label :search, "ユーザーを追加"
+    =f.text_field :search, id: "user-search-field", class: "form-control mb-3", placeholder: "追加したいユーザー名を入力してください"
     #user-search-result
   .form-group
-    =f.label :user, "現在のユーザー"
-    .js-book-user.border-bottom.mb-3
-      input type="hidden" name="book[user_ids][]" value="#{current_user.id}"
-      #user-search-result
-      p.book-user__name #{current_user.nickname}
-    - @book.users.each do |user|
-      - next if user == current_user
-      .js-book-user.d-flex.justify-content-between.border-bottom
-        input type="hidden" name="group[user_ids][]" value="#{user.id}"
-        p.book-user__name #{user.nickname}
-        .book-user__btn--remove 削除
+    =f.label :user, "ユーザー"
+    .book-users
+      .book-user.border-bottom.mb-2
+        input type="hidden" name="book[user_ids][]" value="#{current_user.id}"
+        p.book-user__name #{current_user.nickname}
+      - @book.users.each do |user|
+        - next if user == current_user
+        .book-user.d-flex.justify-content-between.border-bottom.mb-2
+          input type="hidden" name="book[user_ids][]" value="#{user.id}"
+          p.book-user__name #{user.nickname}
+          .book-user__btn.book-user__btn--remove.text-secondary 削除
   =f.submit class: "btn btn-info"
