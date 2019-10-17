@@ -11,7 +11,7 @@ ja:
       one_page:
         display_entries:
           zero: "%{entry_name}がありません"
-          one: "<b>一つの</b>%{entry_name}しか表示されていません"
-          other: "他<b>%{count}</b>個の%{entry_name}が表示されています"
+          one: "1件の%{entry_name}が表示されています"
+          other: "%{count}件の%{entry_name}が表示されています"
       more_pages:
-        display_entries: "<b>%{first}&nbsp;-&nbsp;%{last}</b> 全部<b>%{total}</b>個の%{entry_name}が表示されています"
+        display_entries: "全%{total}件中%{first}&nbsp;-&nbsp;%{last}件の%{entry_name}が表示されています"
