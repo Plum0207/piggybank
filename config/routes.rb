@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       post :import, on: :collection
     end
   end
+  resources :users, only: [:index]
 end
