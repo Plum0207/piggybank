@@ -11,7 +11,7 @@
     =f.text_field :title, class: "form-control"
   .form-group
     =f.label :search, "ユーザーを追加"
-    =f.text_field :search, id: "user-search-field", class: "form-control mb-3", placeholder: "追加したいユーザー名を入力してください"
+    =f.text_field :search, id: "user-search-field", class: "form-control mb-3", placeholder: "追加したいユーザー名を入力してください", autocomplete: "off"
     #user-search-result
   .form-group
     =f.label :user, "ユーザー"
