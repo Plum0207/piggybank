@@ -1,5 +1,5 @@
 h1 帳簿一覧
-= link_to '帳簿を作成', new_book_path, class: 'btn btn-info'
+= link_to '帳簿を新規作成', new_book_path, class: 'btn btn-primary'
 
 .mb-3
 .table-responsive
@@ -13,16 +13,13 @@ h1 帳簿一覧
       - @books.each do |book|
         tr
           td= link_to book.title, book_records_path(book)
-          - users_nicknames = ""
-          - book.users.each do |user|
-            - users_nicknames += "#{user.nickname}　"
-          td= users_nicknames
+          td= book.users_list
           td
             = link_to edit_book_path(book), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
-              span.d-none.d-sm-inline.pl-1 編集
+              span.d-none.d-md-inline.pl-1 編集
             = link_to book_path(book), method: :delete,
             data: { confirm: "帳簿を削除しますか？"},
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
-              span.d-none.d-sm-inline.pl-1 削除
+              span.d-none.d-md-inline.pl-1 削除

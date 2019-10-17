@@ -6,4 +6,14 @@ class Book < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :users, presence: true
+
+  def users_list
+    users_list = ""
+    users = self.users.order("nickname ASC")
+    users.each do |user|
+      users_list += "#{user.nickname}　"
+    end
+    return users_list
+  end
+
 end
