@@ -9,6 +9,7 @@ class Record < ApplicationRecord
     validates :category
     validates :wallet
   end
+  validates :content, length: { maximum: 20 }
   validates :amount, numericality: { only_integer: true }
 
   scope :recent, -> { order(date: :desc) }

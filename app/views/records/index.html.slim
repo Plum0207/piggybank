@@ -1,29 +1,23 @@
 h1 入出金一覧
 .buttons.mb-3
-  = link_to '入出金記録を追加', new_book_record_path, class: 'btn btn-info'
+  = link_to '入出金記録を追加', new_book_record_path, class: 'btn btn-primary'
   = link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
 
-= search_form_for @q, url:book_records_path, class: 'mb-3' do |f|
-  .form-group.row
-    =f.label :content_cont, '内容', class: 'col-sm-2 col-form-label'
-    .col-sm-10
-      = f.search_field :content_cont, class: 'form-control'
-  .form-group.row
-    =f.label :category_cont, '費目', class: 'col-sm-2 col-form-label'
-    .col-sm-10
-      = f.search_field :category_cont, class: 'form-control'
-  .form-group.row
-    =f.label :wallet_cont, '支払者', class: 'col-sm-2 col-form-label'
-    .col-sm-10
-      = f.search_field :wallet_cont, class: 'form-control'
-  .form-group
-      = f.submit class: 'btn btn-info'
+p.mb-1 条件を指定して検索
+= search_form_for @q, url:book_records_path, class: 'mb-3 form-inline align-items-start' do |f|
+  =f.label :content_cont, '内容', class: 'sr-only'
+  = f.search_field :content_cont, class: 'form-control mr-1 mb-1', placeholder: '内容'
+  =f.label :category_cont, '費目', class: 'sr-only'
+  = f.search_field :category_cont, class: 'form-control mr-1 mb-1',placeholder: '費目'
+  =f.label :wallet_cont, '支払者', class: 'sr-only'
+  = f.search_field :wallet_cont, class: 'form-control mr-1 mb-1', placeholder: '支払者'
+  = f.submit class: 'btn btn-outline-secondary'
 
 .mb-3
-  = paginate @records
-  = page_entries_info @records
+  .pagenation.pagination-sm= paginate @records
+  small= page_entries_info @records
 
-.table-responsive.mb-3
+.table-responsive
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
@@ -50,8 +44,7 @@ h1 入出金一覧
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
               span.d-none.d-md-inline.pl-1 削除
-= link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info mb-3'
-
-= form_with url:import_book_records_path, local: true, multipart: true, class: 'mb-3' do
-  = file_field_tag :file
-  = submit_tag "インポート", class: 'btn btn-info'
+= link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info btn-sm mb-1'
+= form_with url:import_book_records_path, local: true, multipart: true, class: 'd-flex align-items-start' do
+  = file_field_tag :file, class: 'mr-1 border rounded'
+  = submit_tag "インポート", class: 'btn btn-info btn-sm'
