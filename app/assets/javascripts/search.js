@@ -1,5 +1,14 @@
 $(function(){
 
+  function bookUsers(){
+    let ids = new Array();
+    $(".book-users").find('input').each(function(){
+      let id = Number($(this).val());
+      ids.push(id);
+    });
+    return ids;
+  }
+
   function appendUser(user){
     let html = `<div class="book-user mb-2 border-bottom d-flex justify-content-between">
                   <p class="book-user__name">${ user.name }</p>
@@ -39,8 +48,11 @@ $(function(){
       if(input.length == 0){
       }
       else if(users.length !==0){
+        let ids = bookUsers();
         users.forEach(function(user){
-          appendUser(user);
+          if ($.inArray(user.id, ids) == -1){
+            appendUser(user);
+          }
         });
       }
       else {
@@ -63,5 +75,4 @@ $(function(){
   $(".book-users").on('click', ".book-user__btn--remove", function(){
     $(this).parent().remove();
   });
-
-})
+});
