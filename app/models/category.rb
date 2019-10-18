@@ -4,6 +4,19 @@ class Category < ApplicationRecord
   validates :name, presence: true, length: { maximum: 10 }
   validates :budget, presence: true, numericality: { only_integer: true }
 
+  def records(book)
+    @category_records = book.records.where(category: "#{self.name}")
+  end
+
+  def records_amount(book)
+    records(book)
+    total_amount = 0
+    @category_records.each do |record|
+      total_amount += record.amount
+    end
+    return total_amount
+  end
+
   def self.csv_attributes
     ["name", "budget"]
   end

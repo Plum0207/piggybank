@@ -4,6 +4,23 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = @book.categories.all
+    @income = @categories.find_by(name:"収入")
+    @spending = @categories.where.not(name: "収入")
+
+    @income_budget = @income.budget
+    @income_amount = @income.records_amount(@book)
+
+    spending_budget = 0
+    @spending.each do |category|
+      spending_budget += category.budget
+    end
+    @spending_budget = spending_budget
+
+    spending_amount = 0
+    @spending.each do |category|
+      spending_amount += category.records_amount(@book)
+    end
+    @spending_amount = spending_amount
 
     respond_to do |format|
       format.html
@@ -67,4 +84,5 @@ class CategoriesController < ApplicationController
   def set_category
     @category = Category.find(params[:id])
   end
+
 end
