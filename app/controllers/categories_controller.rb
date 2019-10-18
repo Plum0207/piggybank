@@ -49,7 +49,7 @@ class CategoriesController < ApplicationController
     if @category.update(category_params)
     redirect_to book_categories_path(@book), notice: '費目と予算を更新しました'
     else
-      flash.new[:alert] = "費目と予算を入力してください"
+      flash.now[:alert] = "費目と予算を入力してください"
       render :edit
     end
   end
