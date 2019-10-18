@@ -10,7 +10,10 @@
   .form-group.form-row
     =f.label :name, "費目",class: "col-md-3 col-form-label text-md-right"
     .col-md-9
-      =f.text_field :name, class: 'form-control'
+      - if category.name == "収入"
+        =f.text_field :name, class: 'form-control', readonly: true
+      - else
+        =f.text_field :name, class: 'form-control'
       small.form-text ※10文字以内で入力してください
   .form-group.form-row
     =f.label :budget, "予算",class: "col-md-3 col-form-label text-md-right"
