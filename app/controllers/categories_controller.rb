@@ -42,9 +42,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @category.update(category_params)
     redirect_to book_categories_path(@book), notice: '費目と予算を更新しました'
