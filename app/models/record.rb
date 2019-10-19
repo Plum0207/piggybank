@@ -13,6 +13,7 @@ class Record < ApplicationRecord
   validates :amount, numericality: { only_integer: true }
 
   scope :recent, -> { order(date: :desc) }
+  scope :old, -> {order(date: :asc)}
 
   def self.ransackable_attributes(auth_object = nil)
     %w[date content category wallet]
@@ -29,7 +30,7 @@ class Record < ApplicationRecord
   def self.generate_csv
     CSV.generate(headers: true) do |csv|
       csv << csv_attributes
-      all.each do |record|
+      all.old.each do |record|
         csv << csv_attributes.map{ |attr| record.send(attr) }
       end
     end
