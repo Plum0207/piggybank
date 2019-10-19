@@ -10,11 +10,7 @@ class Category < ApplicationRecord
 
   def records_amount(book)
     records(book)
-    total_amount = 0
-    @category_records.each do |record|
-      total_amount += record.amount
-    end
-    return total_amount
+    @category_records.sum(:amount)
   end
 
   def self.csv_attributes

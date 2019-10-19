@@ -10,11 +10,7 @@ class CategoriesController < ApplicationController
     @income_budget = @income.budget
     @income_amount = @income.records_amount(@book)
 
-    spending_budget = 0
-    @spending.each do |category|
-      spending_budget += category.budget
-    end
-    @spending_budget = spending_budget
+    @spending_budget = @spending.sum(:budget)
 
     spending_amount = 0
     @spending.each do |category|
