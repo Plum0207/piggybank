@@ -1,7 +1,8 @@
 h1 ユーザー情報変更
-= link_to '戻る', root_path, class: 'btn btn-secondary'
+= link_to '帳簿一覧へ', books_path, class: 'btn btn-secondary mb-3'
 = form_with scope: resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch }, class: "mt-5, signupForm", local: true do |f|
-  = devise_error_messages!
+  .devise-form_errors.text-danger
+    = devise_error_messages!
   .form-group
     = f.label :nickname
     = f.text_field :nickname, class: "form-control"
@@ -9,17 +10,18 @@ h1 ユーザー情報変更
     = f.label :email
     = f.email_field :email, class: "form-control",autocomplete: "email"
   .form-group
-    = f.label :password
+    = f.label :password ,"新しいパスワード"
     - if @minimum_password_length
       | （
       = @minimum_password_length
-      | 文字以上）（変更しない場合は入力不要）
+      | 文字以上）
     = f.password_field :password, class: "form-control",autocomplete: "off"
+    small.form-text ※変更しない場合は入力不要
   .form-group
-    = f.label :password_confirmation
+    = f.label :password_confirmation,"新しいパスワードを再入力"
     = f.password_field :password_confirmation, class:"form-control", autocomplete: "off"
   .form-group
-    = f.label :current_password
-    |（現在のパスワードを入力）
-    = f.password_field :current_password, class:"form-control", autocomplete: "current-password"
-  = f.submit class: "btn btn-info"
+    = f.label :current_password, "現在のパスワード"
+    = f.password_field :current_password, class:"form-control", autocomplete: "off"
+  .text-center
+    = f.submit class: "btn btn-primary"
