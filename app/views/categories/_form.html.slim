@@ -1,0 +1,24 @@
+= link_to '費目と予算一覧へ戻る', book_categories_path, class: 'btn btn-secondary mb-3'
+
+=form_with model: [book, category], local: true do |f|
+  -if category.errors.any?
+    .book-form_errors.text-danger
+      h3= "エラーが発生しました"
+      ul
+        - category.errors.full_messages.each do |message|
+          li= message
+  .form-group.form-row
+    =f.label :name, "費目",class: "col-md-3 col-form-label text-md-right"
+    .col-md-9
+      - if category.name == "収入"
+        =f.text_field :name, class: 'form-control', readonly: true
+      - else
+        =f.text_field :name, class: 'form-control'
+      small.form-text ※10文字以内で入力してください
+  .form-group.form-row
+    =f.label :budget, "予算",class: "col-md-3 col-form-label text-md-right"
+    .col-md-9
+      =f.number_field :budget, class: 'form-control'
+      small.form-text ※半角数字で入力してください
+  .text-center
+    =f.submit class: 'btn btn-primary'

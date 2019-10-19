@@ -2,7 +2,16 @@ class Category < ApplicationRecord
   belongs_to :book
 
   validates :name, presence: true, length: { maximum: 10 }
-  validates :budget, presence: true
+  validates :budget, presence: true, numericality: { only_integer: true }
+
+  def records(book)
+    @category_records = book.records.where(category: "#{self.name}")
+  end
+
+  def records_amount(book)
+    records(book)
+    @category_records.sum(:amount)
+  end
 
   def self.csv_attributes
     ["name", "budget"]

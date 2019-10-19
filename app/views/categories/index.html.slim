@@ -1,12 +1,9 @@
 h1 費目と予算一覧
-p
-  | 一覧にある費目のみ、記録を入力するときに選択できます。
-  br
-  |必要な費目と予算をあらかじめ全て追加してください。
-= link_to '費目と予算を追加', new_book_category_path, class: 'btn btn-info'
-= link_to '入出金一覧へ戻る', book_records_path, class: 'btn btn-info ml-2'
+p 予め設定した費目のみ、記録を入力するときに選択できます
+= link_to '費目と予算を追加', new_book_category_path, class: 'btn btn-primary'
+= link_to '入出金一覧へ戻る', book_records_path, class: 'btn btn-secondary ml-2'
 
-.mb-3
+h3.my-3 収支合計
 .table-responsive
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
@@ -19,33 +16,18 @@ p
     tbody
       tr
         td= "収入"
-        - if @categories.find_by(name: "収入")
-          - income_budget = @categories.find_by(name: "収入").budget
-        - else
-          - income_budget = 0
-        td= income_budget
-        - income_records = @book.records.where(category: "収入")
-        - income_amount = 0
-        - income_records.each do |income_record|
-          - income_amount += income_record.amount
-        td= income_amount
-        td= income_budget - income_amount
+        td= @income_budget
+        td= @income_amount
+        td= @income_budget - @income_amount
         td
       tr
         td= "支出"
-        - spending_budget = 0
-        - @categories.each do |category|
-          - next if category.name == "収入"
-          -spending_budget += category.budget
-        td= spending_budget
-        - spending_records = @book.records.where.not(category: "収入")
-        - spending_amount = 0
-        - spending_records.each do |spending_record|
-          - spending_amount += spending_record.amount
-        td = spending_amount
-        td = spending_budget - spending_amount
+        td= @spending_budget
+        td= @spending_amount
+        td= @spending_budget - @spending_amount
         td
 
+h3.mb-3 費目毎の予算と実績
 .table-responsive
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
@@ -60,23 +42,19 @@ p
         tr
           td= category.name
           td= category.budget
-          - category_records = @book.records.where(category: "#{category.name}")
-          - used_amount = 0
-          - category_records.each do |category_record|
-            - used_amount += category_record.amount
-          td= used_amount
-          td= category.budget - used_amount
+          td= category.records_amount(@book)
+          td= category.budget - category.records_amount(@book)
           td
             = link_to edit_book_category_path(@book, category), class: 'btn btn-outline-secondary btn-sm' do
               i.fa.fa-edit
               span.d-none.d-sm-inline.pl-1 編集
-            = link_to book_category_path(@book, category), method: :delete,
-            data: { confirm: "費目を削除しますか？"},
-            class: 'btn btn-outline-secondary btn-sm ml-2' do
-              i.fa.fa-trash
-              span.d-none.d-sm-inline.pl-1 削除
-= link_to 'エクスポート', book_categories_path(format: :csv), class: 'btn btn-info mb-3'
-
-= form_with url: import_book_categories_path, local: true, multipart: true, class: 'mb-3' do
-  = file_field_tag :file
-  = submit_tag "インポート", class: 'btn btn-info'
+            - unless category == @income
+              = link_to book_category_path(@book, category), method: :delete,
+              data: { confirm: "費目を削除しますか？"},
+              class: 'btn btn-outline-secondary btn-sm ml-2' do
+                i.fa.fa-trash
+                span.d-none.d-sm-inline.pl-1 削除
+= link_to 'エクスポート', book_categories_path(format: :csv), class: 'btn btn-info btn-sm mb-1'
+= form_with url: import_book_categories_path, local: true, multipart: true, class: 'd-flex align-items-start' do
+  = file_field_tag :file, class: 'mr-1 border rounded'
+  = submit_tag "インポート", class: 'btn btn-info btn-sm'

@@ -4,6 +4,19 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = @book.categories.all
+    @income = @categories.find_by(name:"収入")
+    @spending = @categories.where.not(name: "収入")
+
+    @income_budget = @income.budget
+    @income_amount = @income.records_amount(@book)
+
+    @spending_budget = @spending.sum(:budget)
+
+    spending_amount = 0
+    @spending.each do |category|
+      spending_amount += category.records_amount(@book)
+    end
+    @spending_amount = spending_amount
 
     respond_to do |format|
       format.html
@@ -25,14 +38,11 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @category.update(category_params)
     redirect_to book_categories_path(@book), notice: '費目と予算を更新しました'
     else
-      flash.new[:alert] = "費目と予算を入力してください"
+      flash.now[:alert] = "費目と予算を入力してください"
       render :edit
     end
   end
@@ -67,4 +77,5 @@ class CategoriesController < ApplicationController
   def set_category
     @category = Category.find(params[:id])
   end
+
 end
