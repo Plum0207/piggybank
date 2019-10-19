@@ -22,6 +22,6 @@ h1 ユーザー情報変更
     = f.password_field :password_confirmation, class:"form-control", autocomplete: "off"
   .form-group
     = f.label :current_password, "現在のパスワード"
-    = f.password_field :current_password, class:"form-control", autocomplete: "current-password"
+    = f.password_field :current_password, class:"form-control", autocomplete: "off"
   .text-center
     = f.submit class: "btn btn-primary"

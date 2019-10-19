@@ -5,11 +5,12 @@ h1 新規登録
   = devise_error_messages!
   .form-group
     = f.label :nickname
-    = f.text_field :nickname, class: "form-control"
+    = f.text_field :nickname, class: "form-control",autocomplete: "off"
     small.form-text ※12文字以内で入力してください
   .form-group
     = f.label :email
-    = f.email_field :email, class: "form-control",autocomplete: "email"
+    = f.email_field :email, class: "form-control",
+    autocomplete: "off"
   .form-group
     = f.label :password
     - if @minimum_password_length
