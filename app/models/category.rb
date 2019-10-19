@@ -17,9 +17,13 @@ class Category < ApplicationRecord
     ["name", "budget"]
   end
 
+  def self.csv_attributes_ja
+    ["費目", "予算"]
+  end
+
   def self.generate_csv
     CSV.generate(headers: true) do |csv|
-      csv << csv_attributes
+      csv << csv_attributes_ja
       all.each do |category|
         csv << csv_attributes.map { |attr| category.send(attr) }
       end
@@ -28,9 +32,11 @@ class Category < ApplicationRecord
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      category = new
-      category.attributes = row.to_hash.slice(*csv_attributes)
-      category.save!
+      row = row.to_hash.slice(*csv_attributes_ja)
+      self.create(
+        name: row["費目"],
+        budget: row["予算"]
+      )
     end
   end
 end
