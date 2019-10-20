@@ -55,7 +55,8 @@ h3.mb-3 費目毎の予算と実績
                 span.d-none.d-sm-inline.pl-1 削除
 
 h3.mb-3 CSVデータ
-= link_to 'エクスポート', book_categories_path(format: :csv), class: 'btn btn-info btn-sm mb-1'
-= form_with url: import_book_categories_path, local: true, multipart: true, class: 'd-flex align-items-start' do
+= link_to 'エクスポート', book_categories_path(format: :csv), class: 'btn btn-info btn-sm mb-2'
+= form_with url: import_book_categories_path, local: true, multipart: true, class: 'd-flex align-items-start mb-2' do
   = file_field_tag :file, class: 'mr-1 border rounded'
   = submit_tag "インポート", class: 'btn btn-info btn-sm'
+= button_to 'インポート用CSVファイル', download_book_categories_path, method: :get, class: 'btn btn-outline-info btn-sm mb-3'
