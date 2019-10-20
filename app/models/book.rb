@@ -9,6 +9,14 @@ class Book < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   def users_order
     self.users.order("nickname ASC")
   end
