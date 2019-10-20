@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_book
-  before_action :set_category, except: [:index, :new, :create, :import]
+  before_action :set_category, only: [:edit, :update, :destroy]
 
   def index
     @categories = @book.categories.chronological
@@ -62,6 +62,13 @@ class CategoriesController < ApplicationController
       redirect_to book_categories_path(@book)
       flash[:alert] = "インポートするファイルを選択してください"
     end
+  end
+
+  def download
+    download_file_name = "public/files/import-categories.csv"
+    send_file download_file_name,
+    filename: "import-categories.csv",
+    type: 'csv'
   end
 
   private

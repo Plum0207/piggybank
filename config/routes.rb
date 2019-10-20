@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
     resources :categories, except: [:show] do
       post :import, on: :collection
+      get :download, on: :collection
     end
     resources :charts, only: [:index]
   end
