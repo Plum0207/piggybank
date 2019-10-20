@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   before_action :set_book
-  before_action :set_record, except: [:index, :new, :create, :import]
+  before_action :set_record, only: [:edit, :update,:destroy]
   before_action :set_users, only: [:new, :create, :edit]
 
   def index
