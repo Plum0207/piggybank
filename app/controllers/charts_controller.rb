@@ -19,6 +19,11 @@ class ChartsController < ApplicationController
     amount = {name: "実績", data: amount_data}
 
     @column_chart_data = [budget, amount]
+
+    @pie_chart_data = {}
+    @spending.each do |category|
+      @pie_chart_data["#{category.name}"] = category.records_amount(@book)
+    end
   end
 
   def set_book
