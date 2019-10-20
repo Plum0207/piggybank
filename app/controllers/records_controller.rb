@@ -55,6 +55,13 @@ class RecordsController < ApplicationController
     end
   end
 
+  def download
+    download_file_name = "public/files/import-records.csv"
+    send_file download_file_name,
+    filename: "import-records.csv",
+    type: 'csv'
+  end
+
   private
   def record_params
     params.require(:record).permit(:date, :content, :amount, :category, :wallet).merge(user_id: current_user.id)
