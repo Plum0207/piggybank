@@ -7,6 +7,8 @@ class Book < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :users, presence: true
 
+  scope :recent, -> { order(created_at: :desc) }
+
   def users_order
     self.users.order("nickname ASC")
   end

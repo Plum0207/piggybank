@@ -6,7 +6,7 @@ h1 #{current_user.nickname}さんの帳簿一覧
   table.table.table-sm.table-hover.text-nowrap
     thead.thead-light
       tr
-        th= Book.human_attribute_name(:title)
+        th= sort_link(@q, :title)
         th= Book.human_attribute_name(:users)
         th
     tbody
