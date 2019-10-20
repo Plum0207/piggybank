@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   before_action :set_book
   before_action :set_record, only: [:edit, :update,:destroy]
-  before_action :set_users, only: [:new, :create, :edit]
+  before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
     @records = @book.records
