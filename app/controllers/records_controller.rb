@@ -80,7 +80,9 @@ class RecordsController < ApplicationController
     @book.users_order.each do |user|
       @users << user[:nickname]
     end
+    if @book.users.length > 1
     @users << "共通"
+    end
   end
 
 end
