@@ -7,6 +7,16 @@ class Book < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :users, presence: true
 
+  scope :recent, -> { order(created_at: :desc) }
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   def users_order
     self.users.order("nickname ASC")
   end

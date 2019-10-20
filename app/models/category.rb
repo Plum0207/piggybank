@@ -4,6 +4,8 @@ class Category < ApplicationRecord
   validates :name, presence: true, length: { maximum: 10 }
   validates :budget, presence: true, numericality: { only_integer: true }
 
+  scope :chronological, -> { order(created_at: :asc)}
+
   def records(book)
     @category_records = book.records.where(category: "#{self.name}")
   end

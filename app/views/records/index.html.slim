@@ -1,8 +1,9 @@
 h1 入出金一覧
-.buttons.mb-3
+.buttons.mb-2
   = link_to '記録を追加', new_book_record_path, class: 'btn btn-primary'
   = link_to '費目と予算', book_categories_path, class: 'btn btn-info ml-2'
   = link_to '帳簿一覧', books_path, class: 'btn btn-secondary ml-2'
+p.mb-3 予め設定した費目のみ、記録を入力するときに選択できます
 
 p.mb-1 条件を指定して検索
 = search_form_for @q, url:book_records_path, class: 'mb-3 form-inline align-items-start' do |f|
@@ -45,7 +46,9 @@ p.mb-1 条件を指定して検索
             class: 'btn btn-outline-secondary btn-sm ml-2' do
               i.fa.fa-trash
               span.d-none.d-md-inline.pl-1 削除
-= link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info btn-sm mb-1'
-= form_with url:import_book_records_path, local: true, multipart: true, class: 'd-flex align-items-start' do
+h3.mb-3 CSVデータ
+= link_to 'エクスポート', book_records_path(format: :csv), class: 'btn btn-info btn-sm mb-2'
+= form_with url:import_book_records_path, local: true, multipart: true, class: 'd-flex align-items-start mb-2' do
   = file_field_tag :file, class: 'mr-1 border rounded'
   = submit_tag "インポート", class: 'btn btn-info btn-sm'
+= button_to 'インポート用CSVファイル', download_book_records_path, method: :get, class: 'btn btn-outline-info btn-sm mb-3'

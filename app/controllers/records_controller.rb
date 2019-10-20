@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   before_action :set_book
-  before_action :set_record, except: [:index, :new, :create, :import]
-  before_action :set_users, only: [:new, :create, :edit]
+  before_action :set_record, only: [:edit, :update,:destroy]
+  before_action :set_users, only: [:new, :create, :edit, :update]
 
   def index
     @records = @book.records
@@ -55,6 +55,13 @@ class RecordsController < ApplicationController
     end
   end
 
+  def download
+    download_file_name = "public/files/import-records.csv"
+    send_file download_file_name,
+    filename: "import-records.csv",
+    type: 'csv'
+  end
+
   private
   def record_params
     params.require(:record).permit(:date, :content, :amount, :category, :wallet).merge(user_id: current_user.id)
@@ -73,7 +80,9 @@ class RecordsController < ApplicationController
     @book.users_order.each do |user|
       @users << user[:nickname]
     end
+    if @book.users.length > 1
     @users << "共通"
+    end
   end
 
 end

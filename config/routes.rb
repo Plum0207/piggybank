@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   resources :books, except: [:show] do
     resources :records, except: [:show] do
       post :import, on: :collection
+      get :download, on: :collection
     end
     resources :categories, except: [:show] do
       post :import, on: :collection
+      get :download, on: :collection
     end
     resources :charts, only: [:index]
   end

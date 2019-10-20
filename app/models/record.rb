@@ -12,7 +12,7 @@ class Record < ApplicationRecord
   validates :content, length: { maximum: 20 }
   validates :amount, numericality: { only_integer: true }
 
-  scope :recent, -> { order(date: :desc) }
+  scope :recent, -> { order(created_at: :desc) }
   scope :old, -> {order(date: :asc)}
 
   def self.ransackable_attributes(auth_object = nil)
