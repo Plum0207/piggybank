@@ -14,12 +14,14 @@
   .form-group.form-row
     =f.label :content, "内容", class: "col-md-3 col-form-label text-md-right"
     .col-md-9
-      =f.text_field :content, class: 'form-control'
+      =f.text_field :content, class: 'form-control',
+      autocomplete: "off"
       small.form-text ※20文字以内で入力してください
   .form-group.form-row
     =f.label :amount, "金額", class: "col-md-3 col-form-label text-md-right"
     .col-md-9
-      =f.number_field :amount, class: 'form-control'
+      =f.number_field :amount, class: 'form-control',
+      autocomplete: "off"
       small.form-text ※半角数字で入力してください
   .form-group.form-row
     .col-md-3.col-form-label.text-md-right 費目
