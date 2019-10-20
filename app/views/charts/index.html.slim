@@ -1,0 +1,11 @@
+h1 グラフ
+= link_to '費目と予算一覧', book_categories_path, class: 'btn btn-info'
+= link_to '入出金一覧', book_records_path, class: 'btn btn-secondary ml-2'
+
+h3.my-3 費目別の予算と実績
+.chart.mx-auto.mb-3
+  = column_chart @column_chart_data, height: "70vh"
+
+h3.my-3 支出に占める各費目の割合
+.chart.mx-auto.mb-3
+  = pie_chart @amount_data, height: "70vh"

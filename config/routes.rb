@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       root to: 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-  
+
   resources :books, except: [:show] do
     resources :records, except: [:show] do
       post :import, on: :collection
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :categories, except: [:show] do
       post :import, on: :collection
     end
+    resources :charts, only: [:index]
   end
   resources :users, only: [:index]
+
 end
