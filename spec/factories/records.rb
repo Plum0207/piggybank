@@ -5,5 +5,8 @@ FactoryBot.define do
     amount {100}
     category {"サンプル"}
     wallet {"サンプル"}
+    created_at { Faker::Time.between_dates(from: Date.today - 1, to: Date.today)}
+    book
+    user
   end
 end
