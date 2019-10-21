@@ -291,7 +291,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
   byebug
-  capybara (>= 2.15)
+  capybara
   chartkick
   chromedriver-helper
   coffee-rails (~> 4.2)
