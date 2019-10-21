@@ -6,8 +6,8 @@ p.maintitle.display-4.text-center.my-5
 .top-image.text-center.mb-5
   = image_tag 'animal_chara_computer_buta.png', alt: "butasan", class: "img-responsive"
 
-= form_with scope: resource, as: resource_name, url: session_path(resource_name), class: "my-3", local: true do |f|
-  .form-group
+= form_with scope: resource, as: resource_name, url: session_path(resource_name), class: "my-3 newsession-form", local: true do |f|
+  .form-group.
     = f.label :email
     br
     = f.email_field :email, autofocus: true, class: "form-control", autocomplete: "off"
