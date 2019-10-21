@@ -128,7 +128,6 @@ describe RecordsController do
 
       it 'assigns the requested record to @record' do
         expect(assigns(:record)).to eq record
-        binding
       end
 
       it 'renders the :edit template' do
