@@ -10,6 +10,10 @@ body{
   color: #1760a0;
 }
 
+#error_explanation{
+  color: #DC3545
+}
+
 table{
   background-color: #fff;
 }
@@ -18,10 +22,16 @@ a {
   color:#212529;
 }
 
+.newsession-form{
+  max-width: 400px;
+  margin: 0 auto 1rem;
+}
+
 .form-group {
   max-width: 600px;
   margin: 0 auto 1rem;
 }
+
 .book-user {
   max-width: 600px;
   p{
